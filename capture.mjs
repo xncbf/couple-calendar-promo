@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const W = 1290, H = 2796;
+const W = 1284, H = 2778;
 
 const screenshots = [
   { id: 'ss1', file: 'appstore_ss1.png' },
