@@ -1,0 +1,24 @@
+{
+  "name": "couple-calendar-promo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xncbf/couple-calendar-promo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/xncbf/couple-calendar-promo/issues"
+  },
+  "homepage": "https://github.com/xncbf/couple-calendar-promo#readme",
+  "dependencies": {
+    "puppeteer": "^24.40.0"
+  }
+}
