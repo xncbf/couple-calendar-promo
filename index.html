@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>커플 캘린더 - 둘만의 일정, 하나의 캘린더</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a2e;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(165deg, #fff5f5 0%, #ffe8ec 30%, #ffd6e0 60%, #f8c8dc 100%);
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,107,129,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-content {
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  z-index: 1;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.hero-text .badge {
+  display: inline-block;
+  background: rgba(255,107,129,0.12);
+  color: #e8456b;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.hero-text h1 span {
+  background: linear-gradient(135deg, #e8456b, #ff6b81);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-text p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.app-store-btn {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.app-store-btn:hover {
+  transform: scale(1.05);
+}
+
+.app-store-btn img {
+  height: 54px;
+}
+
+.hero-screens {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-frame {
+  width: 280px;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+  background: #fff;
+  border: 8px solid #1a1a2e;
+  position: relative;
+}
+
+.phone-frame.secondary {
+  width: 260px;
+  transform: translateY(40px);
+}
+
+.phone-frame img {
+  width: 100%;
+  display: block;
+}
+
+.phone-frame .placeholder {
+  width: 100%;
+  aspect-ratio: 9/19.5;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Features */
+.features {
+  padding: 120px 24px;
+  background: #fff;
+}
+
+.features .container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.section-title p {
+  font-size: 17px;
+  color: #777;
+  line-height: 1.6;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.feature-card .icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 20px;
+}
+
+.feature-card:nth-child(1) .icon { background: #fff0f3; }
+.feature-card:nth-child(2) .icon { background: #f0f4ff; }
+.feature-card:nth-child(3) .icon { background: #fff8eb; }
+.feature-card:nth-child(4) .icon { background: #f0fff4; }
+.feature-card:nth-child(5) .icon { background: #faf0ff; }
+.feature-card:nth-child(6) .icon { background: #f0faff; }
+
+.feature-card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 15px;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* Screenshot showcase */
+.showcase {
+  padding: 100px 24px;
+  background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+}
+
+.showcase .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.showcase-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
+
+.showcase-item {
+  width: 220px;
+  text-align: center;
+}
+
+.showcase-item .phone-small {
+  width: 220px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  border: 6px solid #222;
+  background: #fff;
+  margin-bottom: 16px;
+}
+
+.showcase-item .phone-small img {
+  width: 100%;
+  display: block;
+}
+
+.showcase-item .phone-small .placeholder {
+  width: 100%;
+  aspect-ratio: 9/19.5;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 13px;
+  padding: 16px;
+}
+
+.showcase-item .caption {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Highlight section */
+.highlight {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.highlight .container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.highlight-block {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+.highlight-block:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.highlight-block .text {
+  flex: 1;
+}
+
+.highlight-block .text h3 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.highlight-block .text p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.7;
+}
+
+.highlight-block .visual {
+  flex: 0 0 280px;
+}
+
+.highlight-block .visual .phone-frame {
+  width: 260px;
+  margin: 0 auto;
+}
+
+/* CTA */
+.cta {
+  padding: 100px 24px;
+  text-align: center;
+  background: linear-gradient(165deg, #fff5f5 0%, #ffe8ec 50%, #ffd6e0 100%);
+}
+
+.cta h2 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.cta p {
+  font-size: 17px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+/* Footer */
+footer {
+  padding: 40px 24px;
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+  background: #fff;
+}
+
+footer a {
+  color: #999;
+  text-decoration: none;
+}
+
+/* Privacy / Support links */
+.legal-links {
+  margin-top: 12px;
+}
+
+.legal-links a {
+  margin: 0 12px;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 48px;
+  }
+  .hero-text h1 { font-size: 36px; }
+  .feature-grid { grid-template-columns: 1fr; gap: 32px; }
+  .highlight-block,
+  .highlight-block:nth-child(even) {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-screens { gap: 12px; }
+  .phone-frame { width: 200px; }
+  .phone-frame.secondary { width: 180px; }
+  .showcase-row { gap: 16px; }
+  .showcase-item { width: 160px; }
+  .showcase-item .phone-small { width: 160px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="badge">♥ 커플 필수 앱</div>
+      <h1>둘만의 일정,<br><span>하나의 캘린더</span></h1>
+      <p>기념일, 데이트, 일상 일정까지.<br>커플 캘린더 하나로 함께 관리하세요.<br>위젯으로 홈 화면에서 바로 확인!</p>
+      <a href="https://apps.apple.com/app/id6759252117" class="app-store-btn">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드">
+      </a>
+    </div>
+    <div class="hero-screens">
+      <!-- 📸 메인 스크린샷: img 태그의 src를 교체하세요 -->
+      <div class="phone-frame">
+        <img src="screenshots/hero-1.png" alt="커플 캘린더 메인 화면"
+             onerror="this.outerHTML='<div class=placeholder>📸<br>스크린샷 1<br><br>screenshots/hero-1.png</div>'">
+      </div>
+      <div class="phone-frame secondary">
+        <img src="screenshots/hero-2.png" alt="커플 캘린더 기념일"
+             onerror="this.outerHTML='<div class=placeholder>📸<br>스크린샷 2<br><br>screenshots/hero-2.png</div>'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>커플에게 꼭 필요한 기능</h2>
+      <p>복잡한 건 빼고, 필요한 것만 담았어요</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">📅</div>
+        <h3>공유 캘린더</h3>
+        <p>일정을 실시간으로 동기화.<br>서로의 스케줄을 한눈에 확인하세요.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💕</div>
+        <h3>기념일 관리</h3>
+        <p>D-day와 경과일을 자동 계산.<br>소중한 날을 놓치지 마세요.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔔</div>
+        <h3>푸시 알림</h3>
+        <p>일정 추가·수정 시 상대방에게 알림.<br>앱을 열지 않아도 바로 확인.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📱</div>
+        <h3>홈 화면 위젯</h3>
+        <p>모든 크기의 위젯 지원.<br>잠금화면에서도 일정을 확인하세요.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🎨</div>
+        <h3>커스텀 테마</h3>
+        <p>배경 사진, 액센트 컬러,<br>이모지까지 취향대로 꾸미세요.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">☁️</div>
+        <h3>클라우드 동기화</h3>
+        <p>기기를 바꿔도 데이터가 안전하게.<br>iCloud & Firebase로 자동 백업.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOT SHOWCASE -->
+<section class="showcase">
+  <div class="container">
+    <div class="section-title">
+      <h2>한눈에 보는 커플 캘린더</h2>
+      <p>심플하지만 필요한 건 다 있어요</p>
+    </div>
+    <div class="showcase-row">
+      <!-- 📸 스크린샷들: src를 교체하세요 -->
+      <div class="showcase-item">
+        <div class="phone-small">
+          <img src="screenshots/monthly.png" alt="먼슬리 뷰"
+               onerror="this.outerHTML='<div class=placeholder>📸<br>먼슬리 뷰<br><br>screenshots/monthly.png</div>'">
+        </div>
+        <div class="caption">먼슬리 뷰</div>
+      </div>
+      <div class="showcase-item">
+        <div class="phone-small">
+          <img src="screenshots/list.png" alt="리스트 뷰"
+               onerror="this.outerHTML='<div class=placeholder>📸<br>리스트 뷰<br><br>screenshots/list.png</div>'">
+        </div>
+        <div class="caption">리스트 뷰</div>
+      </div>
+      <div class="showcase-item">
+        <div class="phone-small">
+          <img src="screenshots/anniversary.png" alt="기념일"
+               onerror="this.outerHTML='<div class=placeholder>📸<br>기념일<br><br>screenshots/anniversary.png</div>'">
+        </div>
+        <div class="caption">기념일</div>
+      </div>
+      <div class="showcase-item">
+        <div class="phone-small">
+          <img src="screenshots/widget.png" alt="위젯"
+               onerror="this.outerHTML='<div class=placeholder>📸<br>위젯<br><br>screenshots/widget.png</div>'">
+        </div>
+        <div class="caption">위젯</div>
+      </div>
+      <div class="showcase-item">
+        <div class="phone-small">
+          <img src="screenshots/settings.png" alt="설정"
+               onerror="this.outerHTML='<div class=placeholder>📸<br>설정<br><br>screenshots/settings.png</div>'">
+        </div>
+        <div class="caption">설정</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHT SECTIONS -->
+<section class="highlight">
+  <div class="container">
+    <div class="highlight-block">
+      <div class="text">
+        <h3>📋 3가지 뷰로 편하게</h3>
+        <p>먼슬리, 리스트, 이얼리 뷰를 자유롭게 전환하세요. 한 달 일정을 한눈에 보거나, 리스트로 빠르게 스크롤하거나, 연간 뷰로 큰 그림을 확인하세요.</p>
+      </div>
+      <div class="visual">
+        <div class="phone-frame">
+          <img src="screenshots/yearly.png" alt="이얼리 뷰"
+               onerror="this.outerHTML='<div class=placeholder>📸<br>이얼리 뷰<br><br>screenshots/yearly.png</div>'">
+        </div>
+      </div>
+    </div>
+    <div class="highlight-block">
+      <div class="text">
+        <h3>💑 간편한 커플 연결</h3>
+        <p>근처에 있다면 폰을 맞대고 범프! 멀리 있다면 초대 코드로 연결. 연결 후에는 모든 일정이 실시간으로 동기화됩니다.</p>
+      </div>
+      <div class="visual">
+        <div class="phone-frame">
+          <img src="screenshots/pairing.png" alt="페어링 화면"
+               onerror="this.outerHTML='<div class=placeholder>📸<br>페어링 화면<br><br>screenshots/pairing.png</div>'">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>지금 시작하세요 💕</h2>
+  <p>둘만의 캘린더로 매일을 더 특별하게</p>
+  <a href="https://apps.apple.com/app/id6759252117" class="app-store-btn">
+    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드">
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 LoveBridge. All rights reserved.</p>
+  <div class="legal-links">
+    <a href="privacy.html">개인정보 처리방침</a>
+    <a href="support.html">고객 지원</a>
+  </div>
+</footer>
+
+</body>
+</html>
